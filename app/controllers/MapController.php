@@ -26,7 +26,7 @@ class MapController extends Controller
             return $this->response;
         }
 
-        $cars = Cars::find();
+        $cars = Cars::find(['status_id = 1']);
 
         $cars_array = [];
         foreach ($cars as $car) {
