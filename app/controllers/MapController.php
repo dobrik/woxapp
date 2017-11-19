@@ -4,8 +4,7 @@ namespace Controllers;
 
 use Phalcon\Mvc\Controller;
 use Models\Users;
-use Models\Routes;
-use Models\Orders;
+use Models\Cars;
 use Validation\GetMapValidation;
 
 class MapController extends Controller
@@ -27,7 +26,31 @@ class MapController extends Controller
             return $this->response;
         }
 
+        $cars = Cars::find();
 
-
+        $cars_array = [];
+        foreach ($cars as $car) {
+            $cars_array[] = [
+                'id' => $car->id,
+                'driver_id' => $car->driver_id,
+                'status' => $car->status_id,
+                'color' => $car->color,
+                'direction' => $car->direction,
+                'yer' => $car->year,
+                'brand' => $car->brand,
+                'model' => $car->model,
+                'currency' => $car->currency,
+                'planting_costs' => $car->planting_costs,
+                'driver_phone' => $car->getCarDriver()->phone,
+                'car_photo' => $car->car_photo,
+                'costs_per_1' => $car->costs_per_1,
+                'location' => [
+                    'lat' => $car->car_lat,
+                    'lan' => $car->car_lon,
+                ]
+            ];
+        }
+        $this->response->setJsonContent(['cars' => $cars_array]);
+        return $this->response;
     }
 }

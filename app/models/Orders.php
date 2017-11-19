@@ -9,7 +9,7 @@ use Models\Users;
 class Orders extends Model
 {
 
-    public $id, $user_lat, $user_lon, $car_id, $country, $status_id, $region, $driver_id, $created_at;
+    public $id, $user_lat, $user_lon, $car_id, $country, $status_id, $region, $driver_id, $start_time;
 
     public function initialize()
     {
