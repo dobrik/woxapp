@@ -17,5 +17,41 @@ class AddOrderValidation extends Validation
                 ]
             )
         );
+
+        $this->add(
+            'driver_id',
+            new PresenceOf(
+                [
+                    'message' => 'Incorrect parameters of method',
+                ]
+            )
+        );
+
+        $this->add(
+            'car_id',
+            new PresenceOf(
+                [
+                    'message' => 'Incorrect parameters of method',
+                ]
+            )
+        );
+
+        $this->add(
+            'user_location',
+            new PresenceOf(
+                [
+                    'message' => 'Incorrect parameters of method',
+                ]
+            )
+        );
+
+        $this->add(
+            'country_id',
+            new PresenceOf(
+                [
+                    'message' => 'Incorrect parameters of method',
+                ]
+            )
+        );
     }
 }

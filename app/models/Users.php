@@ -35,7 +35,7 @@ class Users extends Model
             'country_id' => $data->country_id
         ];
 
-        return $this->save($_data);
+        return $this->create($_data);
     }
 
     public function validation()

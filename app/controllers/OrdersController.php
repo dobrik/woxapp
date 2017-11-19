@@ -24,11 +24,22 @@ class OrdersController extends Controller
         $user = Users::findFirstByToken($data->access_token);
         if ($user === false) {
             $this->response->setJsonContent(['Error' => 'Invalid access token: ' . $data->access_token]);
+            return $this->response;
+        }
+
+        $driver = Users::findFirst($data->driver_id);
+        if ($driver === false) {
+            $this->response->setJsonContent(['Error' => 'User id not found']);
+            return $this->response;
         }
 
         $Orders = new Orders();
+        $result = $Orders->createOrder($data, $user, $driver);
+        if ($result === false) {
+            $this->response->setJsonContent(['Error' => 'Unknown error']);
+            return $this->response;
+        }
 
-        $result = $Orders->createOrder($data);
 
     }
 }
