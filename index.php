@@ -28,7 +28,7 @@ $loader->register();
 $di = new FactoryDefault();
 
 //set Gearman service
-$di->set(
+/*$di->set(
     'gearman',
     function () {
         $client = new GearmanClient();
@@ -36,7 +36,7 @@ $di->set(
 
         return $client;
     }
-);
+);*/
 
 // Set up the database service
 $di->set(
@@ -46,7 +46,7 @@ $di->set(
             [
                 'host' => 'localhost',
                 'username' => 'root',
-                'password' => '32167',
+                'password' => '',
                 'dbname' => 'phalcon',
             ]
         );

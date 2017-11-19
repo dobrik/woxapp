@@ -46,7 +46,7 @@ class OrdersController extends Controller
             return $this->response;
         }
 
-        $this->gearman->doBackground('new_order_notify_driver', $order->serialize());
+        //$this->gearman->doBackground('new_order_notify_driver', $order->serialize());
 
         $this->response->setJsonContent([
             'order_id' => $order->id,
@@ -85,7 +85,7 @@ class OrdersController extends Controller
             $order->status_id = 1;
             $order->save();
 
-            $this->gearman->doBackground('order_accepted_notify_user', $order->serialize()); //отправляем нотификацию юзеру, что заказ принят
+            //$this->gearman->doBackground('order_accepted_notify_user', $order->serialize()); //отправляем нотификацию юзеру, что заказ принят
         }
     }
 
@@ -116,7 +116,7 @@ class OrdersController extends Controller
         if ($order !== false) {
             $order->delete();
 
-            $this->gearman->doBackground('order_rejected_notify_user', $order->serialize()); //отправляем нотификацию юзеру, что заказ отменен
+            //$this->gearman->doBackground('order_rejected_notify_user', $order->serialize()); //отправляем нотификацию юзеру, что заказ отменен
         }
     }
 
