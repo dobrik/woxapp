@@ -9,7 +9,7 @@ use Models\Users;
 class Orders extends Model
 {
 
-    public $id, $user_lat, $user_lon, $car_id, $country, $region, $route_id, $driver_id, $created_at;
+    public $id, $user_lat, $user_lon, $car_id, $country, $status_id, $region, $driver_id, $created_at;
 
     public function initialize()
     {
@@ -45,12 +45,12 @@ class Orders extends Model
 
         if ($result === false) {
             return false;
-        }else{
+        } else {
             foreach ($data->route_points as $key => $route_point) {
                 $OrderRoutes = new OrderRoutes();
                 $route_point->order_id = $this->id;
                 $result = $OrderRoutes->create((array)$route_point);
-                if($result === false){
+                if ($result === false) {
                     return false;
                 }
             }

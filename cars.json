@@ -1,0 +1,43 @@
+{
+  "cars": [
+    {
+      "id": "2",
+      "status": "1",
+      "color": "red",
+      "direction": "300",
+      "reg_number": "AA 2345",
+      "yer": "2014",
+      "brand": "Audi",
+      "model": "A4",
+      "currency": "frn",
+      "planting_costs": "32",
+      "driver_phone": "380976357289",
+      "costs_per_1": "2",
+      "car_photo": "http://example.com/data/cars/mercedes-ml.png",
+      "location": {
+        "lat": "23.333",
+        "lan": "45.3434"
+      }
+    },
+    {
+      "id": "3",
+      "driver_id": "4",
+      "status": "1",
+      "color": "red",
+      "direction": "300",
+      "reg_number": "AA 2345",
+      "yer": "2014",
+      "brand": "Audi",
+      "model": "A4",
+      "currency": "frn",
+      "planting_costs": "32",
+      "driver_phone": "380976357289",
+      "car_photo": "http://example.com/data/cars/mercedes-ml.png",
+      "costs_per_1": "2",
+      "location": {
+        "lat": "23.333",
+        "lan": "45.3434"
+      }
+    }
+  ]
+}

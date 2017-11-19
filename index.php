@@ -27,6 +27,17 @@ $loader->register();
 
 $di = new FactoryDefault();
 
+//set Gearman service
+$di->set(
+    'gearman',
+    function () {
+        $client = new GearmanClient();
+        $client->addServer('127.0.0.1', '4730');
+
+        return $client;
+    }
+);
+
 // Set up the database service
 $di->set(
     'db',
@@ -48,7 +59,6 @@ $app = new Micro($di);
 const USER_APP_KEY = 'rNkJGSL1sg@Jbz@iFWV8|4fB5lP{n#Z%HGGQtQOb'; //b
 const DRIVER_APP_KEY = 'rNkJGSL1sg@Jbz@iFWV8|4fB5lP{n#Z%HGGQtQOd'; //d
 
-
 // Define the routes here
 
 // Обработчик Users
@@ -62,9 +72,20 @@ $app->mount($users);
 $orders = new MicroCollection();
 $orders->setHandler('Controllers\OrdersController', true);
 $orders->post('/addOrder', 'addOrder');
+$orders->post('/acceptOrder', 'acceptOrder');
+$orders->post('/rejectOrder', 'rejectOrder');
+$orders->put('/setOrderStatus', 'setOrderStatus');
 $app->mount($orders);
 
+// Обработчик Map
+$map = new MicroCollection();
+$map->setHandler('Controllers\MapController', true);
+$map->get('/getMapInfo', 'showAll');
+$app->mount($map);
 
+$app->get('/', function () use ($app){
+
+});
 
 $app->notFound(
     function () use ($app) {

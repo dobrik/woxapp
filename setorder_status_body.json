@@ -1,0 +1,27 @@
+{
+  "access_token": "JY4e0ZNgYxnMef99",
+  "driver_id": "19",
+  "order_id": "19",
+  "bundle": "com.7likes.taxi.driver",
+  "order_status_id": "0",
+  "fact_route": [
+    {
+      "adress": "Ukraine, Dnipro, Malinovskogo 2",
+      "lat": "45.32323",
+      "lon": "39.544645",
+      "sort": "1"
+    },
+    {
+      "adress": "Ukraine, Dnipro, Malinovskogo 2",
+      "lat": "45.32323",
+      "lon": "39.544645",
+      "sort": "2"
+    },
+    {
+      "adress": "Ukraine, Dnipro, Malinovskogo 2",
+      "lat": "45.32323",
+      "lon": "39.544645",
+      "sort": "3"
+    }
+  ]
+}
