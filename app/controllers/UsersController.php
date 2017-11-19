@@ -28,22 +28,22 @@ class UsersController extends Controller
             return $this->response;
         }
 
-        $Model = new Users();
-        $success = $Model->registerUser($data);
+        $user = new Users();
+        $success = $user->registerUser($data);
 
         if ($success === true) {
 
-            $_response = ['token' => $Model->token];
+            $_response = ['token' => $user->token];
             if (strcmp($data->key, USER_APP_KEY) === 0) {
-                $_response['user_id'] = $Model->id;
+                $_response['user_id'] = $user->id;
             } else {
-                $_response['driver_id'] = $Model->id;
+                $_response['driver_id'] = $user->id;
             }
-
+            $this->redis->save($user->id, $user->token);
             //возвращаем данные
             $this->response->setJsonContent($_response);
         } else {
-            $this->response->setJsonContent(['Error' => array_shift($Model->getMessages())->getMessage()]);
+            $this->response->setJsonContent(['Error' => array_shift($user->getMessages())->getMessage()]);
         }
         return $this->response;
     }

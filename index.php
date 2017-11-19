@@ -9,6 +9,8 @@ use Phalcon\Mvc\Micro;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Db\Adapter\Pdo\Mysql as PdoMysql;
 
+use Phalcon\Cache\Backend\Redis;
+use Phalcon\Cache\Frontend\Data as FrontData;
 use Phalcon\Mvc\Micro\Collection as MicroCollection;
 use Phalcon\Security\Random;
 
@@ -53,6 +55,27 @@ $di->set(
     }
 );
 
+//Set up Redis
+$di->set(
+    'redis',
+    function () {
+        return new Redis(
+            new FrontData(
+                [
+                    "lifetime" => 31536000, // кешируем на год
+                ]
+            ),
+            [
+                "host"       => "localhost",
+                "port"       => 6379,
+                "auth"       => "",
+                "persistent" => false,
+                "index"      => 0,
+            ]
+        );
+    }
+);
+
 // Create and bind the DI to the application
 $app = new Micro($di);
 
@@ -82,10 +105,6 @@ $map = new MicroCollection();
 $map->setHandler('Controllers\MapController', true);
 $map->get('/getMapInfo', 'showAll');
 $app->mount($map);
-
-$app->get('/', function () use ($app){
-
-});
 
 $app->notFound(
     function () use ($app) {
