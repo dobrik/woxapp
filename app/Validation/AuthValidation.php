@@ -3,6 +3,7 @@
 namespace Validation;
 
 use Phalcon\Validation;
+use Phalcon\Validation\Validator\PresenceOf;
 
 class AuthValidation extends Validation
 {
@@ -13,6 +14,24 @@ class AuthValidation extends Validation
             new AppKeyValidator(
                 [
                     'message' => 'Invalid application key',
+                ]
+            )
+        );
+
+        $this->add(
+            'password',
+            new PresenceOf(
+                [
+                    'message' => 'Incorrect parameters of method',
+                ]
+            )
+        );
+
+        $this->add(
+            'phone',
+            new PresenceOf(
+                [
+                    'message' => 'Incorrect parameters of method',
                 ]
             )
         );

@@ -9,6 +9,13 @@ use Models\Users;
 
 class UsersController extends Controller
 {
+
+    /**
+     *
+     * Регистрация юзера
+     *
+     * @return mixed
+     */
     public function register()
     {
         $data = $this->request->getJsonRawBody();
@@ -16,47 +23,37 @@ class UsersController extends Controller
         //проверяем ключ приложения
         $validation = new RegisterValidation();
         $messages = $validation->validate($data);
-        if($messages->count() > 0){
+        if ($messages->count() > 0) {
             $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]); //отдаем первую ошибку
             return $this->response;
         }
 
-        //генерим токен длиной 36 символов
-        $random = new \Phalcon\Security\Random();
-        $token = $random->hex(18);
+        $Model = new Users();
+        $success = $Model->registerUser($data);
 
-        $query = 'INSERT INTO Models\Users (username, phone, password, token, country_id) VALUES (:username:, :phone:, :password:, :token:, :country_id:)';
+        if ($success === true) {
 
-        $_data = [
-            'username'      => $data->username,
-            'phone'         => $data->phone,
-            'password'      => md5($data->password),
-            'token'         => $token,
-            'country_id'    => $data->country_id
-        ];
-
-        //пишем юзера в БД
-        $status = $this->modelsManager->executeQuery($query, $_data);
-
-        if($status->success() === true){
-            $user_id = $status->getModel()->id;
-
-            $_response = ['token' => $token];
-            if(strcmp($data->key, USER_APP_KEY) === 0){
-                $_response['user_id'] = $user_id;
-            }else{
-                $_response['driver_id'] = $user_id;
+            $_response = ['token' => $Model->token];
+            if (strcmp($data->key, USER_APP_KEY) === 0) {
+                $_response['user_id'] = $Model->id;
+            } else {
+                $_response['driver_id'] = $Model->id;
             }
 
             //возвращаем данные
             $this->response->setJsonContent($_response);
-
-        }else{
-            $this->response->setJsonContent(['Error' => 'Incorrect parameters of method']);
+        } else {
+            $this->response->setJsonContent(['Error' => array_shift($Model->getMessages())->getMessage()]);
         }
         return $this->response;
     }
 
+    /**
+     *
+     * Авторизация. по телефону и паролю.
+     *
+     * @return mixed
+     */
     public function auth()
     {
         $data = $this->request->getJsonRawBody();
@@ -64,24 +61,25 @@ class UsersController extends Controller
         $validation = new AuthValidation();
         $messages = $validation->validate($data);
 
-        if($messages->count() > 0){
+        if ($messages->count() > 0) {
             $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]);
             return $this->response;
         }
 
-        $current_user = Auth::find(['phone' => $data->phone, 'password' => $data->password]);
+        $current_user = Users::findFirst(['phone = :phone: AND password = :password:', 'bind' => ['phone' => $data->phone, 'password' => $data->password]]);
 
-        var_dump($current_user);
-        exit();
+        if ($current_user === false) {
+            $this->response->setJsonContent(['Error' => 'User not found']);
+        }else{
+            $this->response->setJsonContent(
+                [
+                    'user_id' => $current_user->id,
+                    'token' => $current_user->token,
+                    'user_status' => $current_user->user_status,
+                ]
+            );
+        }
 
-
-
-        $this->response->setJsonContent(
-            [
-                'status' => 'ERROR',
-                'messages' => $data,
-            ]
-        );
 
         return $this->response;
     }

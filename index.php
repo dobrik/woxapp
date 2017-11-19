@@ -58,13 +58,12 @@ $users->post('/register', 'register');
 $users->post('/auth', 'auth');
 $app->mount($users);
 
+// Обработчик Orders
+$orders = new MicroCollection();
+$orders->setHandler('Controllers\OrdersController', true);
+$orders->post('/addOrder', 'addOrder');
+$app->mount($orders);
 
-$app->get(
-    '/api/robots',
-    function () {
-        echo strlen('E@3dkCRjzjN9pskGA2~Ya4?mmPgwvI{K82yz');
-    }
-);
 
 
 $app->notFound(
