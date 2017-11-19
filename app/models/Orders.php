@@ -57,4 +57,17 @@ class Orders extends Model
         }
         return true;
     }
+
+    public function saveFactRoute($routes)
+    {
+        foreach ($routes as $route_point) {
+            $OrderRoutes = new OrderFactRoutes();
+            $route_point->order_id = $this->id;
+            $result = $OrderRoutes->create((array)$route_point);
+            if ($result === false) {
+                return false;
+            }
+        }
+    }
+
 }

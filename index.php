@@ -46,7 +46,7 @@ $di->set(
             [
                 'host' => 'localhost',
                 'username' => 'root',
-                'password' => '',
+                'password' => '32167',
                 'dbname' => 'phalcon',
             ]
         );

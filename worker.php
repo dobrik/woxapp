@@ -5,10 +5,7 @@ $worker->addServer('127.0.0.1', '4730');
 /*Тут мы говорим, что готовы обработать ф-ю function_revert_string_and_caps, и что заниматься этим будет ф-я 'revCaps*/
 $worker->addFunction('some_function', 'revCaps');
 
-/*Запускаем воркер. В таком варианте он отработает один раз*/
-//$worker->work();
 
-/*А это вариант будет висеть демоном - есть на видео*/
 while($worker->work()){};
 
 

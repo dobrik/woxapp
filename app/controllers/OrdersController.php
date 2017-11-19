@@ -8,6 +8,7 @@ use Models\Routes;
 use Models\Orders;
 use Validation\AddOrderValidation;
 use Validation\AcceptOrderValidation;
+use Validation\SetOrderStatusValidation;
 
 class OrdersController extends Controller
 {
@@ -19,7 +20,7 @@ class OrdersController extends Controller
         $messages = $validation->validate($data);
 
         if ($messages->count() > 0) {
-            $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]); //отдаем первую ошибку
+            $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]);
             return $this->response;
         }
 
@@ -63,7 +64,7 @@ class OrdersController extends Controller
         //проверяем все ли данные пришли
         $messages = $validation->validate($data);
         if ($messages->count() > 0) {
-            $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]); //отдаем первую ошибку
+            $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]);
             return $this->response;
         }
 
@@ -95,7 +96,7 @@ class OrdersController extends Controller
         //проверяем все ли данные пришли
         $messages = $validation->validate($data);
         if ($messages->count() > 0) {
-            $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]); //отдаем первую ошибку
+            $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]);
             return $this->response;
         }
 
@@ -121,6 +122,47 @@ class OrdersController extends Controller
 
     public function setOrderStatus()
     {
+        $data = $this->request->getJsonRawBody();
+        $validation = new SetOrderStatusValidation();
+        $messages = $validation->validate($data);
+        if ($messages->count() > 0) {
+            $this->response->setJsonContent(['Error' => $messages->offsetGet(0)->getMessage()]);
+            return $this->response;
+        }
 
+        $user = Users::findFirstByToken($data->access_token);
+        if ($user === false) {
+            $this->response->setJsonContent(['Error' => 'Invalid access token: ' . $data->access_token]);
+            return $this->response;
+        }
+
+        $order = Orders::findFirstById($data->order_id);
+
+        $is_driver = false;
+        if ($user->id === $order->driver_id) {
+            $is_driver = true;
+        }
+
+        if ($is_driver === true) {
+            if ($data->order_status_id != 1 && $data->order_status_id != 5 && $data->order_status_id == ($order->status_id + 1)) {
+                $order->status_id = $data->order_status_id;
+                $order->save();
+                if ($data->order_status_id == 4) {
+                    $order->saveFactRoute($data->fact_route);
+                }
+
+                //тут наверно далжно быть пуш уведомление
+                $this->response->setJsonContent(['Success' => 1]);
+                return $this->response;
+            }
+        } else {
+            if ($order->status_id <= 2 && $order->status_id >= 1 && $data->order_status_id == 6) {
+                $order->status_id = 6;
+                $order->save();
+                //тут наверно тоже
+                $this->response->setJsonContent(['Success' => 1]);
+                return $this->response;
+            }
+        }
     }
 }
