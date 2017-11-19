@@ -1,0 +1,263 @@
+{
+	"info": {
+		"name": "woxapp",
+		"_postman_id": "2e1315a6-dd48-22a5-a51c-746aa3514616",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"key\": \"rNkJGSL1sg@Jbz@iFWV8|4fB5lP{n#Z%HGGQtQOb\",\r\n  \"password\": \"4297f44b13955235245b2497399d7a93\",\r\n  \"phone\": \"380631809115\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.2.203/auth",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"auth"
+					]
+				},
+				"description": "auth"
+			},
+			"response": []
+		},
+		{
+			"name": "/register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"key\": \"rNkJGSL1sg@Jbz@iFWV8|4fB5lP{n#Z%HGGQtQOb\",\r\n  \"username\": \"User Name\",\r\n  \"password\": \"123123\",\r\n  \"country_id\": \"1\",\r\n  \"phone\": \"380631809115\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.2.203/register",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"register"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "addOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"passanger_id\": \"3\",\r\n  \"access_token\": \"E@3dkCRjzjN9pskGA2~Ya4?mmPgwvI{K82yz\",\r\n  \"user_location\": [\r\n    22.333,\r\n    34.455\r\n  ],\r\n  \"car_id\": \"32\",\r\n  \"driver_id\": \"4\",\r\n  \"country_id\": \"13\",\r\n  \"pass_phone\": \"380996783492\",\r\n  \"region_id\": \"12\",\r\n  \"route_points\": [\r\n    {\r\n      \"adress\": \"Ukraine, Dnipro, Malinovskogo 2\",\r\n      \"lat\": \"45.32323\",\r\n      \"lon\": \"39.544645\",\r\n      \"sort\": \"1\"\r\n    },\r\n    {\r\n      \"adress\": \"Ukraine, Dnipro, Malinovskogo 2\",\r\n      \"lat\": \"45.32323\",\r\n      \"lon\": \"39.544645\",\r\n      \"sort\": \"2\"\r\n    },\r\n    {\r\n      \"adress\": \"Ukraine, Dnipro, Malinovskogo 2\",\r\n      \"lat\": \"45.32323\",\r\n      \"lon\": \"39.544645\",\r\n      \"sort\": \"3\"\r\n    }\r\n  ],\r\n  \"start_time\": \"2016-09-25 14:55\",\r\n  \"pass_count\": \"4\",\r\n  \"callme\": \"0\",\r\n  \"large\": \"1\",\r\n  \"pets\": \"1\",\r\n  \"wishlist_option_id\": [\r\n    1,\r\n    2\r\n  ],\r\n  \"baby_chair\": \"1-4\",\r\n  \"payment_type_id\": \"2\",\r\n  \"deffered_payment\": \"1\",\r\n  \"duration\": \"12\",\r\n  \"extension\": \"1:33:00\",\r\n  \"comment\": \"test comment\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://192.168.2.203/addOrder",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"addOrder"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/register driver",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"key\": \"rNkJGSL1sg@Jbz@iFWV8|4fB5lP{n#Z%HGGQtQOd\",\r\n  \"username\": \"Test driver\",\r\n  \"password\": \"321321\",\r\n  \"country_id\": \"1\",\r\n  \"phone\": \"380939999999\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.2.203/register",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"register"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/acceptOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"access_token\": \"e3796b16623de4664ddf49e680b4c04698f1\",\r\n  \"order_id\": \"2\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.2.203/acceptOrder",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"acceptOrder"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/rejectOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"access_token\": \"e3796b16623de4664ddf49e680b4c04698f1\",\r\n  \"order_id\": \"48\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.2.203/rejectOrder",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"rejectOrder"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/setOrderStatus",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"access_token\": \"e3796b16623de4664ddf49e680b4c04698f1\",\r\n  \"driver_id\": \"4\",\r\n  \"order_id\": \"39\",\r\n  \"bundle\": \"com.7likes.taxi.driver\",\r\n  \"order_status_id\": \"4\",\r\n  \"fact_route\": [\r\n    {\r\n      \"address\": \"Ukraine, Dnipro, Malinovskogo 2\",\r\n      \"lat\": \"45.32323\",\r\n      \"lon\": \"39.544645\",\r\n      \"sort\": \"1\"\r\n    },\r\n    {\r\n      \"address\": \"Ukraine, Dnipro, Malinovskogo 2\",\r\n      \"lat\": \"45.32323\",\r\n      \"lon\": \"39.544645\",\r\n      \"sort\": \"2\"\r\n    },\r\n    {\r\n      \"address\": \"Ukraine, Dnipro, Malinovskogo 2\",\r\n      \"lat\": \"45.32323\",\r\n      \"lon\": \"39.544645\",\r\n      \"sort\": \"3\"\r\n    }\r\n  ]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://192.168.2.203/setOrderStatus",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"setOrderStatus"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/getMapInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://192.168.2.203/getMapInfo/?access_token=E@3dkCRjzjN9pskGA2~Ya4?mmPgwvI{K82yz&lng=23.4544545455",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"2",
+						"203"
+					],
+					"path": [
+						"getMapInfo",
+						""
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "E@3dkCRjzjN9pskGA2~Ya4?mmPgwvI{K82yz",
+							"equals": true
+						},
+						{
+							"key": "lng",
+							"value": "23.4544545455",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
